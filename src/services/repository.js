@@ -13,6 +13,7 @@ async function buildBranches(username, repoName) {
 }
 
 async function buildRepoData(username, repoResponse) {
+    /*
     const promises = repoResponse.data.map(async (repoData) => {
         //repoData.fork === false
         if(repoData.fork === false) {
@@ -23,6 +24,28 @@ async function buildRepoData(username, repoResponse) {
             }
         }
     })
+    */
+    /*
+    const promises = repoResponse.data.reduce(async (accumulator, repoData) => {
+        if(repoData.fork === false) {
+            accumulator.push({
+                repository_name: repoData.name,
+                owner_login: repoData.owner.login,
+                branches: await buildBranches(username, repoData.name)
+            });
+        }
+    }, []);
+    */
+
+    const nonForkRepos = repoResponse.data.filter(repoData => repoData.fork === false);
+    //const nonForkRepos = repoResponse.data.filter(repoData => true === true);
+    const promises = nonForkRepos.map(async (repoData) => {
+        return {
+            repository_name: repoData.name,
+            owner_login: repoData.owner.login,
+            branches: await buildBranches(username, repoData.name)
+        };
+    });
 
     return Promise.all(promises);
 }
