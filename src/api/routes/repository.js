@@ -12,6 +12,6 @@ module.exports = (app) => {
         //return res.json({ user: req.currentUser }).status(200);
         const username = req.params.username;
         let result = await repoService.getUserGithubRepositories(username);
-        return res.json({ userData: result }).status(200);
+        return res.json(result).status(200);
     });
 };

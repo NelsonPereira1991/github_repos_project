@@ -20,7 +20,8 @@ module.exports = {
                 get_repository_branches: "/repos/:username/:repositoryname/branches"
             },
             headers: {
-                Accept: "application/vnd.github.v3+json"
+                Accept: "application/vnd.github.v3+json",
+                Authorization:`Basic ${new Buffer.from(process.env.GITHUB_USERNAME+':'+process.env.GITHUB_USER_ACCESS_TOKEN).toString("base64")}`
             }
         }
     },
