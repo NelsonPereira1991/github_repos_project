@@ -1,5 +1,3 @@
-//import { Router, Request, Response } from 'express';
-//import middlewares from '../middlewares';
 const express = require("express");
 const router = express.Router;
 const route = router();
@@ -9,9 +7,10 @@ module.exports = (app) => {
     app.use('/repos', route);
 
     route.get('/:username', async (req, res) => {
-        //return res.json({ user: req.currentUser }).status(200);
         const username = req.params.username;
-        let result = await repoService.getUserGithubRepositories(username);
+        const page = parseInt(req.query.page, 10) ? parseInt(req.query.page, 10) : 1;
+        const callingUrl = `${req.headers.host}${req.baseUrl}/${username}`;
+        let result = await repoService.getUserGithubRepositories(username, page, callingUrl);
         return res.json(result).status(200);
     });
 };

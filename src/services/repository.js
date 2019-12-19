@@ -1,4 +1,5 @@
 const githubLib = require("../libs/github");
+const config = require("../config")
 
 
 async function buildBranches(username, repoName) {
@@ -14,7 +15,7 @@ async function buildBranches(username, repoName) {
 
 async function buildRepoData(username, repoResponse) {
     const nonForkRepos = repoResponse.data.filter(repoData => repoData.fork === false);
-    //const nonForkRepos = repoResponse.data.filter(repoData => true === true);
+    //const nonForkRepos = repoResponse.data.filter(repoData => true === true);//TODO NELSON debug code
     const promises = nonForkRepos.map(async (repoData) => {
         return {
             name: repoData.name,
@@ -26,10 +27,11 @@ async function buildRepoData(username, repoResponse) {
     return Promise.all(promises);
 }
 
-exports.getUserGithubRepositories = async (username) => {
-    const userReposResponse = await githubLib.getUserRepos(username);
+exports.getUserGithubRepositories = async (username, page = 1, callingUrl) => {
+    const userReposResponse = await githubLib.getUserRepos(username, page);
     const reposResult = await buildRepoData(username, userReposResponse);
     return {
-        repositories: reposResult
+        repositories: reposResult,
+        nextLink: reposResult.length === config.external_apis.github.repositories_per_page ? `${callingUrl}?page=${page+1}`: undefined
     }
 }

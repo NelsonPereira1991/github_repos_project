@@ -14,6 +14,8 @@ module.exports = {
     api_prefix: "/api",
     external_apis: {
         github: {
+            repositories_per_page: 1000,
+            branches_per_repository: 1000,
             base_url: "https://api.github.com/",
             paths: {
                 get_repositories: "users/:username/repos",
@@ -24,6 +26,5 @@ module.exports = {
                 Authorization:`Basic ${new Buffer.from(process.env.GITHUB_USERNAME+':'+process.env.GITHUB_USER_ACCESS_TOKEN).toString("base64")}`
             }
         }
-    },
-
+    }
 };
