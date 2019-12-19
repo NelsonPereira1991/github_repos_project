@@ -14,7 +14,7 @@ exports.getUserRepos = async (username) => {
 };
 
 exports.getReposBranches = async (username, repoName) => {
-    const url = config.external_apis.github.base_url + `/repos/${username}/${repoName}/branches`;
+    const url = config.external_apis.github.base_url + `repos/${username}/${repoName}/branches`;
     //TODO NELSON add githubv3 header
     return axios.get(url).then(response => {
         return response;
