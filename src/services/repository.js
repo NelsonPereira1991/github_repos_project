@@ -1,5 +1,5 @@
 const githubLib = require("../libs/github");
-const config = require("../config")
+const config = require("../config");
 
 
 async function buildBranches(username, repoName) {
@@ -15,7 +15,6 @@ async function buildBranches(username, repoName) {
 
 async function buildRepoData(username, repoResponse) {
     const nonForkRepos = repoResponse.data.filter(repoData => repoData.fork === false);
-    //const nonForkRepos = repoResponse.data.filter(repoData => true === true);//TODO NELSON debug code
     const promises = nonForkRepos.map(async (repoData) => {
         return {
             name: repoData.name,
