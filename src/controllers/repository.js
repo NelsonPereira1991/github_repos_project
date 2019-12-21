@@ -7,7 +7,6 @@ exports.getUserGithubRepositories = async (req, res, next) => {
         let result = await repoService.getUserGithubRepositories(username, page, req.nextLinkBaseUrl);
         return res.json(result).status(200);
     } catch (error) {
-        console.error(JSON.stringify(error));
         next(error);
     }
 }

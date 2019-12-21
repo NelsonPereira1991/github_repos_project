@@ -5,6 +5,29 @@ const axiosConfig = {
     headers: config.external_apis.github.headers,
 };
 
+function parseResponse(githubResponse, resourceType) {
+    let error;
+    if(githubResponse.status === 200){
+        return githubResponse;
+    }
+    switch (githubResponse.response.status) {
+        case 404:
+            error = new Error(`Could not find ${resourceType}`);
+            error.statusCode = 404;
+            throw error;
+        case 401:
+            error = new Error(`Bad credentials, please make sure you have a valid github username and access token`);
+            error.statusCode = 401;
+            throw error;
+        case 200:
+            break;
+        default:
+            error = new Error("Invalid response from github");
+            error.statusCode = 500;
+            throw error;
+    }
+}
+
 exports.getUserRepos = async (username, page = 1) => {
     const url = config.external_apis.github.base_url + `users/${username}/repos`;
     let requestConfig = {
@@ -15,9 +38,9 @@ exports.getUserRepos = async (username, page = 1) => {
         }
     };
     return axios.get(url, requestConfig).then(response => {
-        return response;
+        return parseResponse(response, "User");
     }).catch(error => {
-        return error;
+        return parseResponse(error, "User");
     })
 };
 
@@ -30,8 +53,8 @@ exports.getReposBranches = async (username, repoName) => {
         }
     };
     return axios.get(url, requestConfig).then(response => {
-        return response;
+        return parseResponse(response, "Repository");
     }).catch(error => {
-        return error;
+        return parseResponse(error, "Repository");
     })
 }

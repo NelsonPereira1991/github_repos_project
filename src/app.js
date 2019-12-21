@@ -26,10 +26,13 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-    console.error(JSON.stringify(err));
-    //TODO NELSON handle errors here, if 500 do not send the err.message, else send the message
-    return res.status(err.statusCode || 500).send({
-        status: err.statusCode || 500,
+    console.error(err);
+    if(!err.statusCode || err.statusCode === 500) {
+        err.statusCode = 500;
+        err.message = "Oops, an unexpected error happened, don't worry we are looking into it"
+    }
+    return res.status(err.statusCode).send({
+        status: err.statusCode,
         message: err.message
     });
 });
