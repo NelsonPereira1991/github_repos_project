@@ -1,5 +1,5 @@
-const githubLib = require("../libs/github");
-const config = require("../config");
+const githubLib = require("../../libs/github");
+const config = require("../../config/index");
 
 
 async function buildBranches(username, repoName) {

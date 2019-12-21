@@ -1,11 +1,14 @@
+const responseFactory = require("../../utils/factories/response");
+
 exports.checkHeader = (req, res, next) => {
     if(req.headers.accept && req.headers.accept === "application/json") {
         next();
     } else {
-        return res.status(406).send({
-            status: 406,
-            message: "Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values"
-        });
+        let statusCode = 406;
+        let errorMessage = "Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values";
+        return responseFactory
+            .createResponse(res, statusCode, errorMessage,"error")
+            .send();
     }
 };
 
@@ -27,8 +30,7 @@ exports.errorHandler = (err, req, res, next) => {
         err.statusCode = 500;
         err.message = "Oops, an unexpected error happened, don't worry we are looking into it"
     }
-    return res.status(err.statusCode).send({
-        status: err.statusCode,
-        message: err.message
-    });
+    return responseFactory
+        .createResponse(res, err.statusCode, err.message, "error")
+        .send();
 }

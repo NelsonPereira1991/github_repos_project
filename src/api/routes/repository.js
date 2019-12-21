@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router;
 const route = router();
 const middlewares = require("../middlewares");
-const repoController = require("../../controllers/repository");
+const repoController = require("../controllers/repository");
 
 module.exports = (apiRouter) => {
     apiRouter.use('/repos', route);
