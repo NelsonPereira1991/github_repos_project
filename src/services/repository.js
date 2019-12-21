@@ -8,7 +8,7 @@ async function buildBranches(username, repoName) {
         return {
             name: branchData.name,
             last_commit_sha: branchData.commit.sha
-        }
+        };
     });
     return Promise.all(promises);
 }
@@ -32,5 +32,5 @@ exports.getUserGithubRepositories = async (username, page = 1, callingUrl) => {
     return {
         repositories: reposResult,
         nextLink: reposResult.length === config.external_apis.github.repositories_per_page ? `${callingUrl}?page=${page+1}`: undefined
-    }
+    };
 }

@@ -10,6 +10,7 @@ function parseResponse(githubResponse, resourceType) {
     if(githubResponse.status === 200){
         return githubResponse;
     }
+    //TODO NELSON add the case when number of github api calls are exceeded
     switch (githubResponse.response.status) {
         case 404:
             error = new Error(`Could not find ${resourceType}`);
