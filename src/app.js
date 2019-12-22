@@ -22,3 +22,5 @@ const server = http.Server(app);
 server.listen(config.port, config.host, function onStart(err) {
     err ? console.log(err) : console.info(`Listening on port ${config.port}`);
 });
+
+module.exports = server; // for testing
