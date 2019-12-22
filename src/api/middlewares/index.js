@@ -26,8 +26,8 @@ module.exports = {
     },
 
     errorHandler : (err, req, res, next) => {
-        console.error(err);
         if(!err.statusCode || err.statusCode === 500) {
+            console.error(err);
             err.statusCode = 500;
             err.message = "Oops, an unexpected error happened, don't worry we are looking into it"
         }
