@@ -1,8 +1,8 @@
 const axios = require("axios");
-const Branch = require("../../entities/branch");
-const Repository = require("../../entities/repository");
+const Branch = require("../entities/branch");
+const Repository = require("../entities/repository");
 
-module.exports = class GithubLib {
+module.exports = class GithubUtil {
     constructor(config) {
         this._config = config;
     }
@@ -74,17 +74,17 @@ module.exports = class GithubLib {
         }
     }
 
-    async buildBranches(username, repositoryName) {
+    async parseBranches(username, repositoryName) {
         let branchesResponse = await this.getUserRepoBranches(username, repositoryName);
         return branchesResponse.data.map( (branchData) => {
             return new Branch(branchData.name, branchData.commit.sha).toJSON();
         });
     }
 
-    async buildRepositories(username, repositoriesResponse) {
+    async parseRepositories(username, repositoriesResponse) {
         const nonForkRepos = repositoriesResponse.data.filter(repoData => repoData.fork === false);
         const promises = nonForkRepos.map(async (repoData) => {
-            return new Repository(repoData.name, repoData.owner.login, await this.buildBranches(username, repoData.name)).toJSON();
+            return new Repository(repoData.name, repoData.owner.login, await this.parseBranches(username, repoData.name)).toJSON();
         });
 
         return Promise.all(promises);

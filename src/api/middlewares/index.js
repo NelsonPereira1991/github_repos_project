@@ -13,7 +13,7 @@ exports.checkHeader = (req, res, next) => {
 };
 
 exports.notFoundHandler = (req, res, next) => {
-    const error = new Error("Not found");
+    const error = new Error("The page you are looking for does not exist :(");
     error.statusCode = 404;
     next(error);
 };
