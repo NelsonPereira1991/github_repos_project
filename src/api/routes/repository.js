@@ -6,5 +6,5 @@ const repoController = require("../controllers/repository");
 
 module.exports = (apiRouter) => {
     apiRouter.use('/repos', route);
-    route.get('/:username', middlewares.checkHeader,middlewares.buildNextLinkBaseUrl, repoController.getUserGithubRepositories);
+    route.get('/:username', middlewares.checkHeader, middlewares.buildNextLinkBaseUrl, repoController.getUserRepositories);
 };

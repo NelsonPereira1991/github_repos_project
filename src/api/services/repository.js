@@ -26,7 +26,7 @@ async function buildRepoData(username, repoResponse) {
     return Promise.all(promises);
 }
 
-exports.getUserGithubRepositories = async (username, page = 1, callingUrl) => {
+exports.getUserRepositories = async (username, page = 1, callingUrl) => {
     const userReposResponse = await githubLib.getUserRepos(username, page);
     const reposResult = await buildRepoData(username, userReposResponse);
     return {
