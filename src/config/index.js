@@ -4,8 +4,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 const hasEnv = dotenv.config();
 
-if(!hasEnv) {
-    throw new Error("Missing .env file");
+if(hasEnv.error) {
+    throw new Error("Missing .env file, look for .env.template file to create the required .env file");
 }
 
 module.exports = Object.freeze(
