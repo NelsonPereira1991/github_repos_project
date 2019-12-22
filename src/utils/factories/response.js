@@ -47,13 +47,15 @@ class Response {
     }
 }
 
-exports.createResponse = (res, statusCode, message, type, data) => {
-    switch (type) {
-        case "success":
-            return new Response(res, statusCode, message, data);
-        case "error":
-            return new Response(res, statusCode, message);
-        default:
-            throw Error(`Invalid response type: ${type}`);
+module.exports = {
+    createResponse : (res, statusCode, message, type, data) => {
+        switch (type) {
+            case "success":
+                return new Response(res, statusCode, message, data);
+            case "error":
+                return new Response(res, statusCode, message);
+            default:
+                throw Error(`Invalid response type: ${type}`);
+        }
     }
 };
