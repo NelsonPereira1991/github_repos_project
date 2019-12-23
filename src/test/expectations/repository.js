@@ -44,6 +44,16 @@ module.exports = [
         ]
     },
     {
+        "name": "github_repos_project",
+        "owner_login": "NelsonPereira1991",
+        "branches": [
+            {
+                "name": "master",
+                "last_commit_sha": "c1df817e8a85f3f98196100e539595bf3bc18d9a"
+            }
+        ]
+    },
+    {
         "name": "newTestesIntegracao",
         "owner_login": "NelsonPereira1991",
         "branches": [
