@@ -3,7 +3,7 @@ const gitFactory = require("../../utils/factories/git");
 module.exports = {
     getUserRepositories : async (username, page = 1, callingUrl) => {
         //TODO if we implemented other repo types,e.g bitbucket
-        //we would need to create another util file
+        //we would only need to create another util file
         //but the code here would not need to be changed, other then receive the gitType in the request
         const gitType = "github";
         const gitUtil = gitFactory.createGitUtil(gitType);

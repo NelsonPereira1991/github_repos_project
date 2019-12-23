@@ -21,7 +21,8 @@ module.exports = class GithubUtil {
             headers: this._config.headers,
             params: {
                 per_page: this._config.repositories_per_page,
-                page
+                page,
+                type: 'owner'
             }
         };
         return axios.get(url, requestConfig).then(response => {
@@ -82,6 +83,9 @@ module.exports = class GithubUtil {
     }
 
     async parseRepositories(username, repositoriesResponse) {
+        //Yeah I don't really like to do this, I looked in the github api and it does not seem to exist a way to get non-fork user repos
+        //documentation link https://developer.github.com/v3/repos/#list-user-repositories
+        //tried with type as 'owner' and it still returns forked repos, default for type is 'owner' anyway
         const nonForkRepos = repositoriesResponse.data.filter(repoData => repoData.fork === false);
         const promises = nonForkRepos.map(async (repoData) => {
             return new Repository(repoData.name, repoData.owner.login, await this.parseBranches(username, repoData.name)).toJSON();
