@@ -3,7 +3,6 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const server = require('../app');
 const should = chai.should();
-const expectedRepositories = require("./expectations/repository");
 
 
 chai.use(chaiHttp);
@@ -54,7 +53,12 @@ describe('GET /api/repos/:username tests', () => {
                 res.body.status.should.equal(200);
                 res.body.message.should.equal("Repositories fetched successfully");
                 res.body.data.nextLink.should.contain("?page=2");
-                res.body.data.repositories.should.to.eql(expectedRepositories);
+                res.body.data.repositories.length.should.equal(7);
+                res.body.data.repositories[0].name.should.equal("AGRS_projets");
+                res.body.data.repositories[0].owner_login.should.equal("NelsonPereira1991");
+                res.body.data.repositories[0].branches.length.should.equal(1);
+                res.body.data.repositories[0].branches[0].name.should.equal("master");
+                res.body.data.repositories[0].branches[0].last_commit_sha.should.equal("b34e1c8892d71371edca38ec55dfda5c683a5889");
                 done();
             });
     });
