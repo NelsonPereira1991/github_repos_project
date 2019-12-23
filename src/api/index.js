@@ -4,6 +4,6 @@ const router = express.Router;
 
 module.exports = () => {
     const apiRouter = router();
-    repositoryRoutes(apiRouter);
+    repositoryRoutes(apiRouter);//routes for the repos resource
     return apiRouter;
 }
