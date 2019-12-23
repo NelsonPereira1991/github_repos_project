@@ -69,6 +69,7 @@ module.exports = class GithubUtil {
                 error.statusCode = 403;
                 throw error;
             default:
+                console.error(githubResponse);
                 error = new Error("Invalid response from github");
                 error.statusCode = 500;
                 throw error;
