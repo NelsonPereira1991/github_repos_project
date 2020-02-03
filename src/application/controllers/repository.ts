@@ -15,7 +15,7 @@ export const getUserRepositories = async(req: any, res: Response, next: Function
                 githubApiUser: process.env.GITHUB_USERNAME
             }
             return new GitResponse(res)
-                .success(responseData, 'LALALA Repositories successfully retrieved :)')
+                .success(responseData, 'Repositories successfully retrieved')
         } else {
             return new GitResponse(res)
                 .noContent('No more repositories')
