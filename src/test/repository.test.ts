@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const server = require('../app');
+import chai from 'chai'
+import chaiHttp from 'chai-http'
+import server from "../../app";
 const should = chai.should();
 
 
@@ -51,7 +51,7 @@ describe('GET /api/repos/:username tests', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.status.should.equal(200);
-                res.body.message.should.equal("Repositories fetched successfully");
+                res.body.message.should.equal("LALALA Repositories successfully retrieved :)");
                 res.body.data.nextLink.should.contain("?page=2");
                 res.body.data.repositories.length.should.equal(7);
                 res.body.data.repositories[0].name.should.equal("AGRS_projets");
@@ -68,11 +68,8 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991?page=2')
             .set('accept', 'application/json')
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.status.should.equal(200);
-                res.body.message.should.equal("Repositories fetched successfully");
-                should.not.exist(res.body.data.nextLink);
-                res.body.data.repositories.length.should.equal(0);
+                res.should.have.status(204);
+                should.not.exist(res.body.data);
                 done();
             });
     });
