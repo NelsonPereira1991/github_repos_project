@@ -3,6 +3,10 @@ pipeline {
 
   tools {nodejs "node"}
 
+  environment {
+     GITHUB_USERNAME = 'NelsonPereira1991'
+  }
+
   stages {
 
     stage('Cloning Git') {
@@ -25,6 +29,7 @@ pipeline {
 
     stage('Test') {
       steps {
+         echo "Github Api user is ${GITHUB_USERNAME}"
          sh 'npm test'
       }
     }
