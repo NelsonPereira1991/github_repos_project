@@ -31,15 +31,19 @@ pipeline {
 
     stage('Docker build image') {
        steps {
-          docker.build('github-repos-proj-repository')
+         script {
+            docker.build('github-repos-proj-repository')
+         }
        }
     }
 
     stage('Deploy image') {
        steps {
-          docker.withRegistry('https://221863723091.dkr.ecr.eu-west-2.amazonaws.com', 'ecr:eu-west-2:aws-ecr-gitProject') {
+         script {
+            docker.withRegistry('https://221863723091.dkr.ecr.eu-west-2.amazonaws.com', 'ecr:eu-west-2:aws-ecr-gitProject') {
               docker.image('github-repos-proj-repository').push('latest')
-          }
+            }
+         }
        }
     }
   }
