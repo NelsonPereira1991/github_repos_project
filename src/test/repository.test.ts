@@ -51,7 +51,7 @@ describe('GET /api/repos/:username tests', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.status.should.equal(200);
-                res.body.message.should.equal("Repositories successfully retrieved deployed :)");
+                res.body.message.should.equal("Repositories successfully retrieved deployed");
                 res.body.data.nextLink.should.contain("?page=2");
                 res.body.data.repositories.length.should.equal(7);
                 res.body.data.repositories[0].name.should.equal("AGRS_projets");
