@@ -17,6 +17,7 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
+        echo "Github Api user is ${GITHUB_USERNAME}"
         sh 'npm install'
       }
     }
@@ -29,7 +30,6 @@ pipeline {
 
     stage('Test') {
       steps {
-         echo "Github Api user is ${GITHUB_USERNAME}"
          sh 'npm test'
       }
     }
