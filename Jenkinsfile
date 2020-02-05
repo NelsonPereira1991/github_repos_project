@@ -12,9 +12,11 @@ pipeline {
     }
 
     stage('Getting env variables') {
-      environment {
-        GITHUB_USERNAME = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/username --query Parameters[0].Value)'
-        GITHUB_USER_ACCESS_TOKEN = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/user-access-token --query Parameters[0].Value)'
+      steps {
+        environment {
+          GITHUB_USERNAME = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/username --query Parameters[0].Value)'
+          GITHUB_USER_ACCESS_TOKEN = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/user-access-token --query Parameters[0].Value)'
+        }
       }
     }
 
