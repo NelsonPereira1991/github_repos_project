@@ -4,8 +4,7 @@ pipeline {
   tools {nodejs "node"}
 
   environment {
-    GITHUB_USERNAME = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/username --query Parameters[0].Value --with-decryption | sed \'s/"//g\')'
-    GITHUB_USER_ACCESS_TOKEN = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/user-access-token --query Parameters[0].Value --with-decryption | sed \'s/"//g\')'
+    GITHUB_USERNAME = 'NelsonPereira1991'
   }
 
   stages {
@@ -19,7 +18,6 @@ pipeline {
     stage('Checking env variables') {
       steps {
         echo "Github Api user is ${GITHUB_USERNAME}"
-        echo "Github Api access token is ${GITHUB_USER_ACCESS_TOKEN}"
       }
     }
 
@@ -53,7 +51,7 @@ pipeline {
        steps {
          script {
             docker.withRegistry('https://221863723091.dkr.ecr.eu-west-2.amazonaws.com', 'ecr:eu-west-2:aws-ecr-gitProject') {
-              docker.image('github-repos-proj-repository').push('latest')
+              docker.image('github-repos-proj-repository', '--build-arg GITHUB_USERNAME=${GITHUB_USERNAME} --build-arg param2=2 .').push('latest')
             }
          }
        }
