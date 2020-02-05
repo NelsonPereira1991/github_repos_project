@@ -3,10 +3,6 @@ pipeline {
 
   tools {nodejs "node"}
 
-  environment {
-     GITHUB_USERNAME = 'NelsonPereira1991'
-  }
-
   stages {
 
     stage('Cloning Git') {
@@ -15,9 +11,17 @@ pipeline {
       }
     }
 
+    stage('Getting env variables') {
+      environment {
+        GITHUB_USERNAME = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/username --query Parameters[0].Value)'
+        GITHUB_USER_ACCESS_TOKEN = '$(aws ssm get-parameters --region eu-west-2 --names /jenkins/github/user-access-token --query Parameters[0].Value)'
+      }
+    }
+
     stage('Install dependencies') {
       steps {
         echo "Github Api user is ${GITHUB_USERNAME}"
+        echo "Github Api access token is ${GITHUB_USER_ACCESS_TOKEN}"
         sh 'npm install'
       }
     }
