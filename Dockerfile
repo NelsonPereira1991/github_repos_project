@@ -6,6 +6,8 @@ COPY package.json ./
 
 RUN npm install
 
+ENV GITHUB_USERNAME="NelsonPereira1991"
+
 COPY . .
 
 RUN npm run-script build
