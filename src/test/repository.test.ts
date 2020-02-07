@@ -35,7 +35,6 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991erororhere')
             .set('accept', 'application/json')
             .end((err, res) => {
-                console.log(res.body)
                 expect(res.status).toEqual(404);
                 expect(res.body.status).toEqual(404);
                 expect(res.body.message).toEqual("Could not find User");

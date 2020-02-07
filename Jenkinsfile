@@ -3,12 +3,20 @@ pipeline {
 
   tools {nodejs "node"}
 
+  environment {
+      GITHUB_USERNAME = credentials('/jenkins/github/username')
+  }
+
   stages {
 
     stage('Cloning Git') {
       steps {
         git 'https://github.com/NelsonPereira1991/github_repos_project'
       }
+    }
+
+    stage('Check env variables') {
+        echo "Github Api user is ${GITHUB_USERNAME}"
     }
 
     stage('Clean dist folder') {
