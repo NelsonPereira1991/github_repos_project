@@ -23,7 +23,7 @@ pipeline {
 
     stage('Clean Jest Cache') {
       steps {
-        sh 'npm cleanJest'
+        sh 'npm run-script cleanJest'
       }
     }
 
