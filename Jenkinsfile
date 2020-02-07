@@ -50,7 +50,7 @@ pipeline {
     stage('Docker build image') {
        steps {
          script {
-            docker.build('github-repos-proj-repository', --build-arg gitUser=${GITHUB_USERNAME} --build-arg gitToken=${GITHUB_USER_ACCESS_TOKEN} .)
+            docker.build('github-repos-proj-repository', '--build-arg gitUser=${GITHUB_USERNAME} --build-arg gitToken=${GITHUB_USER_ACCESS_TOKEN} .')
          }
        }
     }
