@@ -6,7 +6,6 @@ const resourcePrefix = "/repos"
 
 const router = (apiRouter: IRouter) => {
     apiRouter.use(resourcePrefix, repositoryRouter)
-    //TODO NELSON CONTINUE
     repositoryRouter.get("/:username", checkHeader, buildNextLinkBaseUrl, getUserRepositories)
 }
 
