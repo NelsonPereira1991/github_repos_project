@@ -24,6 +24,7 @@ pipeline {
     stage('Clean Jest Cache') {
       steps {
         sh 'npm run-script cleanJest'
+        sh 'rm -rf dist/*'
       }
     }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "cleanJest": "npx jest --clearCache",
     "build": "npx tsc",
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "node dist/app.js",
     "dev": "ts-node ./app.ts"
   },
