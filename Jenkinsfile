@@ -11,15 +11,6 @@ pipeline {
       }
     }
 
-    stage('Checking env variables') {
-      steps {
-        def env = System.getenv()
-        def username = env['GITHUB_USERNAME']
-        def token = env['GITHUB_USER_ACCESS_TOKEN']
-        echo "Github Api user is ${username}"
-      }
-    }
-
     stage('Clean dist folder') {
       steps {
         sh 'rm -rf dist/*'
