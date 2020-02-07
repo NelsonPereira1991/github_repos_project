@@ -11,7 +11,6 @@ describe('GET /api/repos/:username tests', () => {
         chai.request(server)
             .get('/api/repos/NelsonPereira1991')
             .end((err, res) => {
-                console.log(res.body)
                 expect(res.status).toEqual(406)
                 expect(res.body.status).toEqual(406)
                 expect(res.body.message).toEqual("Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values")
@@ -36,6 +35,7 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991erororhere')
             .set('accept', 'application/json')
             .end((err, res) => {
+                console.log(res.body)
                 expect(res.status).toEqual(404);
                 expect(res.body.status).toEqual(404);
                 expect(res.body.message).toEqual("Could not find User");
