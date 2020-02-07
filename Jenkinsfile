@@ -16,7 +16,9 @@ pipeline {
     }
 
     stage('Check env variables') {
-        echo "Github Api user is ${GITHUB_USERNAME}"
+        steps {
+            echo "Github Api user is ${GITHUB_USERNAME}"
+        }
     }
 
     stage('Clean dist folder') {
