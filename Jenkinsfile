@@ -17,7 +17,7 @@ pipeline {
 
     stage('Check env variables') {
         steps {
-            echo "Github Api user is ${GITHUB_USERNAME}"
+            echo "Github Api user is ${GITHUB_USERNAME}" 
         }
     }
 
