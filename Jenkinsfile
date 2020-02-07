@@ -3,10 +3,6 @@ pipeline {
 
   tools {nodejs "node"}
 
-  environment {
-    GITHUB_USERNAME = 'NelsonPereira1991'
-  }
-
   stages {
 
     stage('Cloning Git') {
@@ -17,7 +13,10 @@ pipeline {
 
     stage('Checking env variables') {
       steps {
-        echo "Github Api user is ${GITHUB_USERNAME}"
+        def env = System.getenv()
+        def username = env['GITHUB_USERNAME']
+        def token = env['GITHUB_USER_ACCESS_TOKEN']
+        echo "Github Api user is ${username}"
       }
     }
 
