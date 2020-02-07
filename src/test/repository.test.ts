@@ -2,7 +2,6 @@ process.env.NODE_ENV = "test";
 import chai from 'chai'
 import chaiHttp from 'chai-http'
 import server from "../../app";
-const should = chai.should();
 
 
 chai.use(chaiHttp);
@@ -12,9 +11,9 @@ describe('GET /api/repos/:username tests', () => {
         chai.request(server)
             .get('/api/repos/NelsonPereira1991')
             .end((err, res) => {
-                res.should.have.status(406);
-                res.body.status.should.equal(406);
-                res.body.message.should.equal("Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values");
+                expect(res.status).toEqual(406)
+                expect(res.body.status).toEqual(406)
+                expect(res.body.message).toEqual("Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values")
                 done();
             });
     });
@@ -24,9 +23,9 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991')
             .set('accept', 'application/xml')
             .end((err, res) => {
-                res.should.have.status(406);
-                res.body.status.should.equal(406);
-                res.body.message.should.equal("Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values");
+                expect(res.status).toEqual(406);
+                expect(res.body.status).toEqual(406);
+                expect(res.body.message).toEqual("Invalid value for 'accept' header, cannot produce a response matching the list of acceptable values");
                 done();
             });
     });
@@ -36,9 +35,9 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991erororhere')
             .set('accept', 'application/json')
             .end((err, res) => {
-                res.should.have.status(404);
-                res.body.status.should.equal(404);
-                res.body.message.should.equal("Could not find User");
+                expect(res.status).toEqual(404);
+                expect(res.body.status).toEqual(404);
+                expect(res.body.message).toEqual("Could not find User");
                 done();
             });
     });
@@ -49,16 +48,16 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991')
             .set('accept', 'application/json')
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.status.should.equal(200);
-                res.body.message.should.equal("Repositories successfully retrieved");
-                res.body.data.nextLink.should.contain("?page=2");
-                res.body.data.repositories.length.should.equal(7);
-                res.body.data.repositories[0].name.should.equal("AGRS_projets");
-                res.body.data.repositories[0].owner_login.should.equal("NelsonPereira1991");
-                res.body.data.repositories[0].branches.length.should.equal(1);
-                res.body.data.repositories[0].branches[0].name.should.equal("master");
-                res.body.data.repositories[0].branches[0].last_commit_sha.should.equal("b34e1c8892d71371edca38ec55dfda5c683a5889");
+                expect(res.status).toEqual(200);
+                expect(res.body.status).toEqual(200);
+                expect(res.body.message).toEqual("Repositories successfully retrieved");
+                expect(res.body.data.nextLink).toContain("?page=2");
+                expect(res.body.data.repositories.length).toEqual(7);
+                expect(res.body.data.repositories[0].name).toEqual("AGRS_projets");
+                expect(res.body.data.repositories[0].owner_login).toEqual("NelsonPereira1991");
+                expect(res.body.data.repositories[0].branches.length).toEqual(1);
+                expect(res.body.data.repositories[0].branches[0].name).toEqual("master");
+                expect(res.body.data.repositories[0].branches[0].last_commit_sha).toEqual("b34e1c8892d71371edca38ec55dfda5c683a5889");
                 done();
             });
     });
@@ -68,8 +67,8 @@ describe('GET /api/repos/:username tests', () => {
             .get('/api/repos/NelsonPereira1991?page=2')
             .set('accept', 'application/json')
             .end((err, res) => {
-                res.should.have.status(204);
-                should.not.exist(res.body.data);
+                expect(res.status).toEqual(204)
+                expect(res.body.data).toBeUndefined()
                 done();
             });
     });
