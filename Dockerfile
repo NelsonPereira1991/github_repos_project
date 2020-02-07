@@ -6,8 +6,11 @@ COPY package.json ./
 
 RUN npm install
 
-ENV GITHUB_USERNAME="NelsonPereira1991"
-#ENV GITHUB_USER_ACCESS_TOKEN="NelsonPereira1991"
+ARG gitUser
+ARG gitToken
+
+ENV GITHUB_USERNAME=${gitUser}
+ENV GITHUB_USER_ACCESS_TOKEN=${gitToken}
 
 COPY . .
 
