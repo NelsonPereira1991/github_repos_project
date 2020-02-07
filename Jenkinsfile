@@ -21,6 +21,12 @@ pipeline {
       }
     }
 
+    stage('Clean Jest Cache') {
+      steps {
+        sh 'npm cleanJest'
+      }
+    }
+
     stage('Install dependencies') {
       steps {
         sh 'npm install'
