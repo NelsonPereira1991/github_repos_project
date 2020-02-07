@@ -5,6 +5,7 @@ pipeline {
 
   environment {
       GITHUB_USERNAME = credentials('GITHUB_USERNAME')
+      GITHUB_USER_ACCESS_TOKEN = credentials('GITHUB_USER_ACCESS_TOKEN')
   }
 
   stages {
@@ -18,6 +19,7 @@ pipeline {
     stage('Check env variables') {
         steps {
             echo "Github Api user is ${GITHUB_USERNAME}"
+            echo "Github token is ${GITHUB_USER_ACCESS_TOKEN}"
         }
     }
 
