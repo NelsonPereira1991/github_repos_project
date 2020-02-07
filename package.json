@@ -7,8 +7,7 @@
     "build": "tsc",
     "start": "node dist/app.js",
     "dev": "ts-node ./app.ts",
-    "test": "jest --coverage",
-    "postinstall": "npx tsc"
+    "test": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
